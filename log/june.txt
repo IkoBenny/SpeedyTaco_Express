@@ -1,0 +1,62 @@
+=========================================================== (New Entry)
+----------------------------------------------------------- (Problems Encountered)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ (Suggested Solution)
+*********************************************************** (Interesting Points)
+
+
+===========================================================
+
+6/18
+
+Sharing code across JavaScript files. 
+
+reading material:
+
+The Difference Between MJS, CJS, and JS Files in Node.js : https://codingforseo.com/blog/mjs-vs-cjs-files/
+Modules: CommonJS modules | Node.js v22.3.0 Documentation : https://nodejs.org/docs/latest/api/modules.html
+module.exports – How to Export in Node.js and JavaScript : https://www.freecodecamp.org/news/module-exports-how-to-export-in-node-js-and-javascript/
+export - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export
+
+-----------------------------------------------------------
+
+$ node demo.js
+(node:11508) Warning: To load an ES module, set "type": "module" in the package.
+json or use the .mjs extension.
+(Use `node --trace-warnings ...` to show where the warning was created)
+C:\Users\benny\Documents\Projects\SpeedyTaco_Express\src\demo.js:1
+import {tacos, Item} from 'Menu.js';
+^^^^^^
+
+SyntaxError: Cannot use import statement outside a module
+
+-----------------------------------------------------------
+
+$ node Menu.js
+file:///C:/Users/benny/Documents/Projects/SpeedyTaco_Express/src/Menu.js:67
+        module.exports = { tacos, classicBeefTaco }
+        ^
+
+ReferenceError: module is not defined in ES module scope
+This file is being treated as an ES module because it has a '.js' file extension and 'C:\Users\benny\Documents\Projects\SpeedyT
+aco_Express\package.json' contains "type": "module". To treat it as a CommonJS script, rename it to use the '.cjs' file extensi
+on.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Menu.js
+module.exports = { tacos, classicBeefTaco, Item, SimpleItem }
+
+Demo.js
+import {tacos, Item} from './Menu.cjs';
+
+package.json
+{
+	"type": "module"
+}
+
+***********************************************************
+
+In Node.js, a file is treated as a “module”.
+
+
+===========================================================

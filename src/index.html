@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+footer {
+  text-align: center;
+  padding: 10px;
+  background-color: red;
+  color: white;
+}
+
+div.scroll-container {
+  background-color: #333;
+  overflow: auto;
+  white-space: nowrap;
+  padding: 5px;
+}
+
+div.scroll-container img {
+  padding: 5px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto;
+  flex-direction: column;
+}
+
+.grid-container-horizontal {
+  display: grid;
+}
+
+.big-grid-container {
+  background-color: black;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  flex-direction: column;
+  padding 20px;
+}
+
+.photo{
+  	border: 1px solid rgba(0, 0, 0, 0.8);
+  	padding: 20px;
+}
+
+#photo-right {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.grid-item {
+  background-color: yellow;
+  color: red;
+  padding: 20px;
+  border-left: 100px solid transparent;
+  border-right: 100px solid transparent;
+  font-size: 25px;
+  font-style: italic;
+  font-weight: bold;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+	<div class="scroll-container">
+	<img src="logo.png" width= "30%" height="10%">
+	<img src="firefly_classic_beef taco.jpg" width= "15%">
+	<img src="firefly_grilled_chicken_taco.jpg" width= "15%">
+	<img src="firefly_classic_beef taco.jpg" width= "15%">
+	<img src="firefly_classic_beef taco.jpg" width= "15%">
+	<img src="firefly_classic_beef taco.jpg" width= "15%">
+	<img src="firefly_grilled_chicken_taco.jpg" width= "15%">
+	<img src="firefly_classic_beef taco.jpg" width= "15%">
+	<img src="firefly_classic_beef taco.jpg" width= "15%">
+	</div>
+	<div class="big-grid-container">
+	
+		<div class="grid-container">
+			<button class="grid-item">Tacos</button>
+			<button class="grid-item">Burritos</button>
+			<button class="grid-item">Quesadillas</button>  
+			<button class="grid-item">Sides</button>
+			<button class="grid-item">Drinks</button>
+			<button class="grid-item">Desserts</button>  
+			<button class="grid-item">Specials</button>	
+		</div>
+		<img  id="photo-right"src="firefly_classic_beef taco.jpg" width="750px"  height="500px">
+	</div>
+	
+
+<footer>
+      <p>&copy; 2024 SpeedyTaco Express. All rights reserved.</p>
+</footer>
+</body>
+</html>
+
+
