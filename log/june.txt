@@ -2,6 +2,7 @@
 ----------------------------------------------------------- (Problems Encountered)
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ (Suggested Solution)
 *********************************************************** (Interesting Points)
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ (Commands)
 
 
 ===========================================================
@@ -60,3 +61,208 @@ In Node.js, a file is treated as a “module”.
 
 
 ===========================================================
+
+
+6/19
+
+Still working on adding React to an existing JavaScript project. Exploring how to compile JavaScript using Babel. To my understanding, 
+you can not run JSX in a browser. This is where Babel comes in. To compile JSX into JavaScript.
+Then using npm run build and npm run start we stop and start development server on local host. 
+
+reading material:
+
+'next' is not recognized as an internal or external command : https://bobbyhadz.com/blog/next-is-not-recognized-as-internal-or-external-command#:~:text=The%20error%20%22%27next%27%20is%20not%20recognized%20as%20an,to%20install%20next%20before%20running%20npm%20run%20dev.
+Installation : https://nextjs.org/docs/getting-started/installation
+Next.js vs Node.js: A Detailed Comparison : https://www.restack.io/docs/nextjs-knowledge-nextjs-vs-nodejs-comparison
+How to use styles in React: Inline styles, CSS Modules & Styled Components : https://malcoded.com/posts/react-component-style/
+Add React to an Existing Project : https://react.dev/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page
+@babel/plugin-transform-react-jsx : https://babeljs.io/docs/babel-plugin-transform-react-jsx
+Deploying : https://nextjs.org/docs/app/building-your-application/deploying#nodejs-server
+-----------------------------------------------------------
+
+$ node index.js
+file:///C:/Users/benny/Documents/Projects/SpeedyTaco_Express/index.js:5
+  return <h1>Hello from React!</h1>;
+         ^
+
+SyntaxError: Unexpected token '<'
+
+-----------------------------------------------------------
+
+$ npm run build
+
+> build
+> next build
+
+'next' is not recognized as an internal or external command,
+operable program or batch file.
+
+-----------------------------------------------------------
+
+$ npm run build
+
+> build
+> next build
+
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+
+> Build error occurred
+Error: > Couldn't find any `pages` or `app` directory. Please create one under the project root
+    at findPagesDir (C:\Users\benny\Documents\Projects\SpeedyTaco_Express\node_modules\next\dist\lib\find-pages-dir.js:42:15)
+    at C:\Users\benny\Documents\Projects\SpeedyTaco_Express\node_modules\next\dist\build\index.js:404:73
+    at async Span.traceAsyncFn (C:\Users\benny\Documents\Projects\SpeedyTaco_Express\node_modules\next\dist\trace\trace.js:154:20)
+    at async build (C:\Users\benny\Documents\Projects\SpeedyTaco_Express\node_modules\next\dist\build\index.js:366:9)
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Build and run with npm and Babel instead. (mostly positive about this fix) 
+
+To solve the error, run npm install react react-dom next
+
+added pages and app directory to Next.JS project root. 
+
+***********************************************************
+
+The error "'next' is not recognized as an internal or external command, operable program or batch file" 
+occurs when we forget to install the dependencies in a Next.js project.
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+$ npm run build
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+npx create-next-app@latest
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+$ npm run build
+
+> build
+> next build
+
+  ▲ Next.js 14.2.4
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+It looks like you're trying to use TypeScript but do not have the required package(s) installed.
+Installing dependencies
+
+If you are not trying to use TypeScript, please remove the tsconfig.json file from your package root (and any TypeScript files in your pages directory).
+
+
+Installing devDependencies (npm):
+- @types/react
+- @types/node
+
+
+added 5 packages, and audited 118 packages in 11s
+
+10 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+
+   We detected TypeScript in your project and reconfigured your tsconfig.json file for you. Strict-mode is set to false by default.
+   The following suggested values were added to your tsconfig.json. These values can be changed to fit your project's needs:
+
+        - lib was set to dom,dom.iterable,esnext
+        - skipLibCheck was set to true
+        - strict was set to false
+        - incremental was set to true
+        - include was updated to add '.next/types/**/*.ts'
+        - plugins was updated to add { name: 'next' }
+        - strictNullChecks was set to true
+        - exclude was set to ['node_modules']
+
+   The following mandatory changes were made to your tsconfig.json:
+
+        - module was set to esnext (for dynamic import() support)
+        - esModuleInterop was set to true (requirement for SWC / babel)
+        - moduleResolution was set to node (to match webpack resolution)
+        - resolveJsonModule was set to true (to match webpack resolution)
+        - isolatedModules was set to true (requirement for SWC / Babel)
+        - jsx was set to preserve (next.js implements its own optimized jsx transform)
+
+   Collecting page data ...
+   Generating static pages (0/2) ...
+ ✓ Generating static pages (2/2)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (pages)                             Size     First Load JS
+─ ○ /404                                  181 B            79 kB
++ First Load JS shared by all             78.8 kB
+  ├ chunks/framework-f66176bb897dc684.js  45.2 kB
+  ├ chunks/main-dd3f5051c7325b27.js       32 kB
+  └ other shared chunks (total)           1.63 kB
+
+○  (Static)  prerendered as static content
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+$ npm run start
+
+> start
+> next start
+
+  ▲ Next.js 14.2.4
+  - Local:        http://localhost:3000
+
+ ✓ Starting...
+ ✓ Ready in 1579ms
+
+
+===========================================================
+
+6/20
+
+Getting comfortable with Next.JS project structure.
+
+reading material:
+
+Next.js Project Structure : https://nextjs.org/docs/getting-started/project-structure
+
+===========================================================
+
+6/20
+
+Raising comfort level with Next.JS project structure.
+There are two methods to routing in Next.JS. App router and Pages router.
+I am learning and working with App router. 
+
+reading material:
+
+Next.js Project Structure : https://nextjs.org/docs/getting-started/project-structure
+
+***********************************************************
+
+A page is UI that is unique to a route. You can define a page by default exporting a component from a page.js file.
+
+For example, to create index page, add the page.js file inside the app directory.
+
+To create further pages, create a new folder and add the page.js file inside it. For example, to create a page for the /dashboard route, create a new folder called dashboard, and add the page.js file inside it.
+
+
+A layout is UI that is shared between multiple routes. On navigation, layouts preserve state, remain interactive, and do not re-render. Layouts can also be nested.
+
+You can define a layout by default exporting a React component from a layout.js file. The component should accept a children prop that will be populated with a child layout (if it exists) or a page during rendering.
+
+The root layout is defined at the top level of the app directory and applies to all routes. This layout is required and must contain html and body tags, allowing you to modify the initial HTML returned from the server.
+
+By default, layouts in the folder hierarchy are nested, which means they wrap child layouts via their children prop. You can nest layouts by adding layout.js inside specific route segments (folders).
+
+For example, to create a layout for the /dashboard route, add a new layout.js file inside the dashboard folder.
+
+
+As it stands, the same msg will show for http://localhost:3000 and http://localhost:3000/test
+
+
