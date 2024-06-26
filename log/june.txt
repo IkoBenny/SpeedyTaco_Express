@@ -233,7 +233,7 @@ Next.js Project Structure : https://nextjs.org/docs/getting-started/project-stru
 
 ===========================================================
 
-6/20
+6/21
 
 Raising comfort level with Next.JS project structure.
 There are two methods to routing in Next.JS. App router and Pages router.
@@ -244,6 +244,10 @@ reading material:
 Next.js Project Structure : https://nextjs.org/docs/getting-started/project-structure
 
 ***********************************************************
+
+JSX and React are two separate things. They’re often used together, but you can use them independently of each other. JSX is a syntax extension, while React is a JavaScript library.
+
+Adjacent JSX elements must be wrapped in an enclosing tag or use a Fragment <> </>.
 
 A page is UI that is unique to a route. You can define a page by default exporting a component from a page.js file.
 
@@ -265,4 +269,197 @@ For example, to create a layout for the /dashboard route, add a new layout.js fi
 
 As it stands, the same msg will show for http://localhost:3000 and http://localhost:3000/test
 
+===========================================================
 
+6/25
+
+Raising comfort level with Next.JS project structure.
+Working on adding static assets to React/Next project.
+Encountered many obstacles along the way. Most notable, issue with different size
+of images renered using Next.
+
+reading material:
+
+Describing the UI : https://react.dev/learn/describing-the-ui
+Different Ways to Write CSS in React : https://css-tricks.com/different-ways-to-write-css-in-react/
+How to use external css in ReactJS : https://www.altcademy.com/blog/how-to-use-external-css-in-reactjs/
+Image Optimization : https://nextjs.org/docs/app/building-your-application/optimizing/images
+Pages and Layouts : https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts
+Server Components : https://nextjs.org/docs/app/building-your-application/rendering/server-components
+Styling and CSS : https://legacy.reactjs.org/docs/faq-styling.html
+"Syntax error: Selector "body" is not pure" and other bullshit about non-pure selectors #16050 : https://github.com/vercel/next.js/discussions/16050
+Writing Markup with JSX : https://react.dev/learn/writing-markup-with-jsx#1-return-a-single-root-element
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+$ npm run start
+
+> start
+> next start
+
+  ▲ Next.js 14.2.4
+  - Local:        http://localhost:3000
+
+ ✓ Starting...
+ ✓ Ready in 939ms
+ ⚠ For production Image Optimization with Next.js, the optional 'sharp' package is strongly recommended. Run 'npm i sharp', and Next.js will use it automatically for Image Optimization.
+Read more: https://nextjs.org/docs/messages/sharp-missing-in-production
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+$ npm run build
+
+> build
+> next build
+
+  ▲ Next.js 14.2.4
+
+   Creating an optimized production build ...
+Failed to compile.
+
+./app/page.tsx
+Module not found: Can't resolve '../img/tacos/firefly_classic_beef taco.jpg'
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+> Build failed because of webpack errors
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+$ npm run build
+
+> build
+> next build
+
+  ▲ Next.js 14.2.4
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+Failed to compile.
+
+./app/page.tsx:7:58
+Type error: Type '"15%"' is not assignable to type 'number | `${number}` | undefined'.
+
+   5 |   return         <div className="scroll-container">
+   6 |  <Image src="../img/logo.png" width= ".30" height=".10" alt="alt text"/>
+>  7 |  <Image src="../img/tacos/firefly_classic_beef taco.jpg" width= "15%" alt="alt text" />
+     |                                                          ^
+   8 |  <Image src="../img/tacos/firefly_grilled_chicken_taco.jpg" width= "15%" alt="alt text" />
+   9 |  <Image src="../img/tacos/firefly_classic_beef taco.jpg" width= "15%" alt="alt text" />
+  10 |  <Image src="../img/tacos/firefly_classic_beef taco.jpg" width= "15%" alt="alt text" />
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+$ npm run build
+
+> build
+> next build
+
+  ▲ Next.js 14.2.4
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+Failed to compile.
+
+./app/page.tsx:6:3
+Type error: Property 'alt' is missing in type '{ src: string; width: ".30"; height: ".10"; }' but required in type '{ src: string | StaticImport; alt: string; width?: number | `${number}` | undefined; height?: number | `${number}` | undefined; fill?: boolean | undefined; loader?: ImageLoader | undefined; ... 12 more ...; lazyRoot?: string | undefined; }'.
+
+  4 | export default function Page() {
+  5 |   return  <div className="scroll-container">
+> 6 |   <Image src="../img/logo.png" width= ".30" height=".10"/>
+    |    ^
+  7 |   <Image src="../img/tacos/firefly_classic_beef taco.jpg" width= "15%"/>
+  8 |   <Image src="../img/tacos/firefly_grilled_chicken_taco.jpg" width= "15%"/>
+  9 |   <Image src="../img/tacos/firefly_classic_beef taco.jpg" width= "15%"/>
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+$ npm run build
+
+> build
+> next build
+
+  ▲ Next.js 14.2.4
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+Failed to compile.
+
+./app/layout.tsx:9:9
+Type error: Type '{ children: Element[]; class: string; }' is not assignable to type 'DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>'.
+  Property 'class' does not exist on type 'DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>'. Did you mean 'className'?
+
+   7 |     <html lang="en">
+   8 |       <body>
+>  9 |                  <div class="grid-container">
+     |                       ^
+  10 |                  <button class="grid-item">Tacos</button>
+  11 |                  <button class="grid-item">Burritos</button>
+  12 |                  <button class="grid-item">Quesadillas</button>
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+$ npm run build
+
+> build
+> next build
+
+  ▲ Next.js 14.2.4
+
+   Creating an optimized production build ...
+Failed to compile.
+
+./app/page.tsx
+Error:
+  x Unexpected token `div`. Expected jsx identifier
+   ,-[C:\Users\benny\Documents\Projects\SpeedyTaco_Express\app\page.tsx:1:1]
+ 1 | export default function Page() {
+ 2 |   return   <div class="scroll-container">
+   :            ^^^
+ 3 |    <img src="logo.png" width= "30%" height="10%">
+ 4 |    <img src="firefly_classic_beef taco.jpg" width= "15%">
+ 4 |    <img src="firefly_grilled_chicken_taco.jpg" width= "15%">
+   `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/page.tsx
+
+
+> Build failed because of webpack errors
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+$ npm run build
+
+> build
+> next build
+
+  ▲ Next.js 14.2.4
+
+   Creating an optimized production build ...
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|javascript/auto|C:\Users\benny\Docujects\SpeedyTaco_Express\node_modules\next\dist\build\webpack\loaders\next-flight-css-loader.js??ruleSet[1].rules[14].oneOf[7].use[0]!benny\Documents\Projects\SpeedyTaco_Express\node_modules\next\dist\build\webpack\loaders\css-loader\src\index.js??ruleSet[1].rules[14].use[1]!C:\Users\benny\Documents\Projects\SpeedyTaco_Express\node_modules\next\dist\build\webpack\loaders\postcss-loader\src\index.js?1].rules[14].oneOf[7].use[2]!C:\Users\benny\Documents\Projects\SpeedyTaco_Express\src\style.module.css|rsc': No serializer registered ntaxError
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildEssSyntaxError
+Failed to compile.
+
+./src/style.module.css:20:1
+Syntax error: Selector "footer" is not pure (pure selectors must contain at least one local class or id)
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Use .footer or div.footer instead of footer. Do not use tag name without a selector when using CSS modules.
+
+Use only single parent element like <div> or <> when returning component. Multiple JSX elements can NOT touch without aforementioned.
+
+Use className instead of class with JSX. Use Image tags instead of imgs.
+
+Place static content in public folder.  
+
+***********************************************************
+
+I bet styles are not working because CSS module is in wrong location. Will need to investigate further. 
