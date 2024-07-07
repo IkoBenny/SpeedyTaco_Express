@@ -1,0 +1,127 @@
+=========================================================== (New Entry)
+----------------------------------------------------------- (Problems Encountered)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ (Suggested Solution)
+*********************************************************** (Interesting Points)
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ (Commands)
+
+
+===========================================================
+
+7/6
+
+Trying to use styles defined via CSS module using Next.JS
+
+reading material:
+
+defining routes : https://nextjs.org/docs/app/building-your-application/routing/defining-routes
+src directory : https://nextjs.org/docs/app/building-your-application/configuring/src-directory
+Absolute Imports and Module Path Aliases : Absolute Imports and Module Path Aliases
+
+-----------------------------------------------------------
+
+$ npm run build
+
+> build
+> next build
+
+  ▲ Next.js 14.2.4
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+Failed to compile.
+
+./app/layout.tsx:1:20
+Type error: Cannot find module '../src/style.module.css' or its corresponding type declarations.
+
+> 1 | import styles from '../src/style.module.css';
+    |                    ^
+  2 |
+  3 | export default function RootLayout({
+  4 |   children,
+
+-----------------------------------------------------------
+
+$ npm run build
+
+> build
+> next build
+
+  ▲ Next.js 14.2.4
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+Failed to compile.
+
+./src/app/layout.tsx:13:12
+Type error: Type 'number' is not assignable to type 'string'.
+
+  11 |       <body>
+  12 |                  <div className= {styles.gridContainer}>
+> 13 |                  <button className= {styles.grid-item}>Tacos</button>
+     |                          ^
+  14 |                  <button className= {styles.grid-item}>Burritos</button>
+  15 |                  <button className={styles.grid-item}>Quesadillas</button>
+  16 |                  <button className={styles.grid-item}>Sides</button>
+
+-----------------------------------------------------------
+
+$ npm run build
+
+> build
+> next build
+
+  ▲ Next.js 14.2.4
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+Failed to compile.
+
+./src/app/layout.tsx:3:25
+Type error: Cannot find name 'container'.
+
+  1 | const styles = require('/src/app/test/style.module.css');
+  2 |
+> 3 | console.log(styles.grid-container);
+    |                         ^
+  4 | export default function RootLayout({
+  5 |   children,
+  6 | }: {
+
+
+***********************************************************
+
+"In this example, the /dashboard/analytics URL path is not publicly accessible because it does not have a corresponding page.js file. 
+This folder could be used to store components, stylesheets, images, or other colocated files."
+
+
+https://nextjs.org/docs/app/building-your-application/routing/defining-routes
+
+
+***********************************************************
+
+As an alternative to having the special Next.js app or pages directories in the root of your project, 
+Next.js also supports the common pattern of placing application code under the src directory.
+
+To use the src directory, move the app Router folder or pages Router folder to src/app or src/pages respectively.
+
+
+***********************************************************
+
+Using CSS Modules with TypeScript is not as obvious as with JavaScript. The reason is that TypeScript has special treatment for imports and if you try to use CSS Modules the same way you did in JavaScript:
+
+import s from './Button.css';
+You’ll get an error: “Cannot find module ‘./Button.css’”. There are several ways to fix that.
+
+The easy way
+You can bypass TypeScript import magic by using require instead of import:
+
+const s = require('./Button.css');
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+use require()
+
+use CamelCase instead of dashes
